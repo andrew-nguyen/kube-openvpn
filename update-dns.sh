@@ -2,7 +2,9 @@
  
 # Set bash delimeter to be line break
 IFS=$'\n'
- 
+
+vpn="$1"
+
 # VPN DNS Server
 vpndns=$(kubectl get service --namespace=kube-system -o jsonpath='{.spec.clusterIP}' kube-dns)
  
@@ -14,7 +16,7 @@ do
 	echo "Updating dns for $adapter"
 	dnssvr=(`networksetup -getdnsservers $adapter`)
 
-	if [ $dnssvr != $vpndns ]; then
+	if [ $vpn == "vpn" ]; then
 		# set dns server to the vpn dns server
 		networksetup -setdnsservers $adapter $vpndns
 	else
