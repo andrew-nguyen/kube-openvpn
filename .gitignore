@@ -1,0 +1,3 @@
+*.ovpn
+/kube/kube-resources
+/pki
